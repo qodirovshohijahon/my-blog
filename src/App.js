@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { 
   AppBar, 
@@ -13,12 +13,24 @@ import {
   CardMedia,
   CardContent,
   CardActions,
-  Card
+  Card,
+  DialogContent,
+  DialogContentText,
+  TextField,
+  DialogActions
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled'
 import LayerIcon from '@material-ui/icons/Layers'
 import { makeStyles } from '@material-ui/core/styles'
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import RestoreIcon from '@material-ui/icons/Restore';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import FolderIcon from '@material-ui/icons/Folder';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,7 +78,18 @@ cardGrid: {
 const cards = [1,2,3,4,5,6,7,8,9]
 function App() {
   const classes = useStyles()
+  const [value, setValue] = useState("recents")
 
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
+  }
+  const [open, setOpen] = useState(false) 
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false);
+  }
   return (
     <>
     <AppBar position="fixed">
@@ -79,12 +102,54 @@ function App() {
             Web Developer Blog
           </Typography>
            <Box mr={3}>   {/*margin: 3 */}
-            <Button color='inherit' variant='outlined'>
+            <Button color='inherit' variant='outlined' onClick={handleClickOpen}>
               Log In
             </Button>
-            <Button color='secondary' variant='contained'>
+            <Button color='secondary'variant='contained'>
               Sign Up
             </Button>
+            <Dialog
+              open={open} 
+              onClose={handleClose}
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">
+                Log In
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Log in to see videos
+                </DialogContentText>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  label="Email address"
+                  type="email"
+                  fullWidth
+                >
+
+                </TextField>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="pass"
+                  label="Password"
+                  type="password"
+                  fullWidth
+                >
+
+                </TextField>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                  Cancel
+                </Button>
+                <Button onClick={handleClose} color="primary">
+                  Log in
+                </Button>
+              </DialogActions>
+            </Dialog>
           </Box>
         </Toolbar>
       </Container>
@@ -185,6 +250,44 @@ function App() {
         </Grid>
       </Container>
     </main>
+    <footer>
+      <Typography variant="h6" align="center" gutterBottom>
+        Footer
+      </Typography>
+      <BottomNavigation 
+        value={value}
+        onChange={handleChange}
+        className={classes.root}
+      >
+        <BottomNavigationAction
+          label="Recents"
+          value="recents"
+          className={classes.root}
+          icon={<RestoreIcon/>}
+        />
+        <BottomNavigationAction
+          label="Favourites"
+          value="favourites"
+          className={classes.root}
+          icon={<FavoriteIcon/>}
+        />
+        <BottomNavigationAction
+          label="Nearby"
+          value="nearby"
+          className={classes.root}
+          icon={<LocationOnIcon/>}
+        />
+        <BottomNavigationAction
+          label="Folder"
+          value="folder"
+          className={classes.root}
+          icon={<FolderIcon/>}
+        />
+      </BottomNavigation>
+        <Typography align="center" color="textSecondary" component="p" variant="subtitle1">
+          Web developer Blog For React Site
+        </Typography>
+    </footer>
     </>
   );
 }
