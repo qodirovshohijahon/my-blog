@@ -9,9 +9,15 @@ import {
   Box, 
   Button, 
   Paper,
-  Grid
+  Grid,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Card
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
+import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled'
+import LayerIcon from '@material-ui/icons/Layers'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
@@ -45,9 +51,19 @@ mainFeaturesPostContent: {
   position: "relative",
   padding: theme.spacing(6),
   marginTop: theme.spacing(8)
+},
+cardMedia: {
+  paddingTop: "56.25%"
+},
+cardContent: {
+  flexGrow: 1
+},
+cardGrid: {
+  marginTop: theme.spacing(4)
 }
 }))
 
+const cards = [1,2,3,4,5,6,7,8,9]
 function App() {
   const classes = useStyles()
 
@@ -135,6 +151,39 @@ function App() {
           </div>
         </Container>
       </div>
+      <Container className={classes.cardGrid} maxWidth="md">
+        <Grid container spacing={4}>
+          {cards.map((card) => (
+            <Grid item key={card} xs={12} sm={6} md={4}>
+              <Card className={classes.card}>
+                <CardMedia 
+                  className={classes.cardMedia}
+                  image="https://source.unsplash.com/random"
+                  title="imageTitle"
+                />
+                <CardContent className={classes.cardContent}>
+                  <Typography variant="h4" gutterBottom>
+                    Blog Post
+                  </Typography>
+                  <Typography variant="h6" paragraph>
+                    DescritionBlog Post DescritionBlog Post Descrition
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" color="primary">
+                    View
+                  </Button>
+                  <Button size="small" color="primary">
+                    Edit
+                  </Button>
+                  <LayerIcon />
+                  <PlayCircleFilledIcon />
+                  </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </main>
     </>
   );
