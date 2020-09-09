@@ -8,7 +8,8 @@ import {
   Typography, 
   Box, 
   Button, 
-  Paper
+  Paper,
+  Grid
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles'
@@ -54,7 +55,35 @@ function App() {
 
     <main>
       <Paper className={classes.mainFeaturesPost} styles={{backgroundImage: `url(https://source/unsplash.com/random)`}}>
-    
+        <Container fixed>
+          <Grid container>
+            <Grid item md={6}>
+              <div className={classes.mainFeaturesPostContent}>
+                <Typography
+                  component="h1"
+                  color="inherit"
+                  gutterBottom
+                >
+                  Web developer blog
+                </Typography>
+                <Typography
+                  component="h5"
+                  color="inherit"
+                  paragraph
+                >
+                  Lorem Lorem dasdasdasdsfjdsfdsf
+                  Lorem Lorem dasdasdasdsfjdsfdsf
+                  Lorem Lorem dasdasdasdsfjdsfdsf
+                  Lorem Lorem dasdasdasdsfjdsfdsf
+                  Lorem Lorem dasdasdasdsfjdsfdsf
+                </Typography>
+                <Button variant="contained" color="secondary">
+                  Leran More
+                </Button>
+              </div>
+            </Grid>  
+          </Grid>  
+        </Container>    
       </Paper>
     </main>
     </>
